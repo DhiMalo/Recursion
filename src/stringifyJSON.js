@@ -8,7 +8,7 @@ var stringifyJSON = function(obj) {
   // create an empty string and name it storage.
   console.log('obj we are passing into the stringifyJSON function is:', obj );
   var storage = '';
-  // first test checks to see whether the obj is a number.  (Base case)  
+  // first test checks to see whether the argument is a number.  (Base case)  
   if ( typeof(obj) === 'number' ) {
     var result = storage + obj;
     return result;
@@ -16,9 +16,9 @@ var stringifyJSON = function(obj) {
       return storage + 'null';
   } else if ( typeof(obj) === 'boolean' ){ //address test for boolean
       return storage + obj;
-  } else if ( typeof(obj) === 'string') {  //address test for 
+  } else if ( typeof(obj) === 'string') {  //address test for string
       return storage + '\"' + obj + '\"';
-  } else if (Array.isArray(obj)) {
+  } else if (Array.isArray(obj)) { //address test for (1) empty arrays then (2) arrays with a length
     if (obj[0] === undefined) {
       console.log('this thing, ', obj, 'is an empty array'); 
       return '['+']';
