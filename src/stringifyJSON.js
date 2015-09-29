@@ -11,6 +11,9 @@ var stringifyJSON = function(obj) {
     var result = storage + obj;
     return result;
 
+  } else if ((typeof(obj) === 'function') || (obj === undefined)) { 
+    return undefined; //JSON.stringify returns undefined for functions and undefined - priority to address early in the code.
+
   } else if (typeof(obj) === 'string') { 
     return storage + '\"' + obj + '\"';
 
