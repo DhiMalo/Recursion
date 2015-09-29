@@ -6,8 +6,8 @@ var stringifyJSON = function(obj) {
   var coerceString = '';
 
   if ((typeof(obj) === 'number') || (obj === null) || (typeof(obj) === 'boolean')) {
-    var result = coerceString + obj;
-    return result;
+    var string = coerceString + obj;
+    return string;
 
   } else if ((typeof(obj) === 'function') || (obj === undefined) || (obj === 'undefined' || obj === 'functions')) {
     return coerceString;
@@ -16,21 +16,14 @@ var stringifyJSON = function(obj) {
     return coerceString + '\"' + obj + '\"';
 
   } else if (Array.isArray(obj)) {
-    
-    if (obj[0] === undefined) {
-      //console.log(obj, 'is an empty array');
-      return '[' + ']';
 
-    } else if ((typeof(obj[0]) === 'number') && (obj.length === 1)) {
+    if ((typeof(obj[0]) === 'number') && (obj.length === 1)) {
       //console.log(obj, 'is an array with a number in it');
       return '[' + obj[0].toString() + ']';
 
     } else if ((typeof(obj[0]) === 'string') && (obj.length === 1)) {
       //console.log(obj, 'is an array with a string in it');
       return '[' + '\"' + obj[0].toString() + '\"' + ']';
-
-    } else if ((typeof(obj[0]) === 'number') && (typeof(obj[1]) === 'string')) {
-      return '[' + stringifyJSON(obj[0]) + ',' + stringifyJSON(obj[1]) + ']';
       
     } else {
       var resultsArray = [];
