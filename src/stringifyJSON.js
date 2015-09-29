@@ -12,31 +12,38 @@ var stringifyJSON = function(obj) {
   if ( typeof(obj) === 'number' ) {
     var result = storage + obj;
     return result;
+    
   } else if (obj === null) { //test for null
       return storage + 'null';
+
   } else if ( typeof(obj) === 'boolean' ){ //address test for boolean
       return storage + obj;
+
   } else if ( typeof(obj) === 'string') {  //address test for 
       return storage + '\"' + obj + '\"';
+
   } else if (Array.isArray(obj)) {
     if (obj[0] === undefined) {
       console.log(obj, 'is an empty array'); 
       return '['+']';
+
     } else if ( (typeof(obj[0]) === 'number') && (obj.length === 1) ) {
       console.log(obj, 'is an array with a number in it'); 
       return '['+ obj[0].toString() +']';
+
+    } else if ( (typeof(obj[0]) === 'string') && (obj.length === 1) ) {
+      console.log(obj, 'is an array with a string in it'); 
+      return '['+ '\"' + obj[0].toString()+ '\"' +']';
     } else if ( (typeof(obj[0]) === 'number') && (typeof(obj[1]) === 'string' ) ) {
       console.log(obj, 'is an array with a number and string in it'); 
       return '['+ stringifyJSON(obj[0]) + ','+ stringifyJSON(obj[1]) + ']';
     } else { 
       _.each(obj, function(val, index, obj){
         var valCopy = _.identity(val) 
-        valCopy = stringifyJSON(val);
-        console.log('the modified array content is ,',valCopy)
-        console.log('array obj to now be passed is:', obj);
+        valCopy = stringifyJSON(val); //successfully uses recursion
+        console.log('the modified array content is ',valCopy)
         return obj;})  
-      console.log ('now, when I use my stringifyJSON I get the final array of:', '['+'...'+']')
-      return '['+'\"' + obj.toString()+ '\"'+']';
+      return '['+ obj.toString()+ ']';
     }
   } else {return };
 };
