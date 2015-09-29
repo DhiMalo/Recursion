@@ -9,19 +9,23 @@ var getElementsByClassName = function(className){
 var target = className;
 //console.log(target); //targetClassName - successful.
 
-var arrayOfBodyNodes = document.body.childNodes;
-//console.log(arrayOfBodyNodes); // logs 13 correct nodes.
+var arrayLikeNodeObject = document.body.childNodes;
+//console.log(arrayLikeNodeObject); // logs 13 correct nodes.
 
-var objTraverser = function (val1, index, obj) {
-  console.log(val1, index);
-  _.filter(obj, function(val2, key, node){if (target === val2.className) {
-    console.log(val2.className);
-    console.log(val1);
-    return val1;}
-  });
+var resultArray = [];
+
+var objTraverser = function (val, index, obj) {
+  //console.log(val.classList, index, obj);
+  //console.log('target is ', target, 'and val.classList is ', val.classList);
+  if ( (val.classList !== undefined) && (target === val.classList[0]) ) {
+    //console.log(val.classlist, 'is a match');
+    resultArray.push(val);
+  }
 };
-var result = _.map(arrayOfBodyNodes, objTraverser); //use map to return object into the result array.
-return result;
+
+_.each(arrayLikeNodeObject, objTraverser); //use filter to return object into the result array.
+console.log(resultArray);
+return resultArray;
 
 };
 // Note: 
