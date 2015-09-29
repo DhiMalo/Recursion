@@ -12,15 +12,17 @@ var stringifyJSON = function(obj) {
   if ( typeof(obj) === 'number' ) {
     var result = storage + obj;
     return result;
-    
+
   } else if (obj === null) { //test for null
-      return storage + 'null';
+    var result = storage + obj;
+    return result;
 
   } else if ( typeof(obj) === 'boolean' ){ //address test for boolean
-      return storage + obj;
+    var result = storage + obj;
+    return result;
 
   } else if ( typeof(obj) === 'string') {  //address test for 
-      return storage + '\"' + obj + '\"';
+    return storage + '\"' + obj + '\"';
 
   } else if (Array.isArray(obj)) {
     if (obj[0] === undefined) {
@@ -49,7 +51,7 @@ var stringifyJSON = function(obj) {
 };
 
 
- 
+
 
 //Notes: 
 //string coersion seems to work for numbers, functions, booleans, undefined, NaN
