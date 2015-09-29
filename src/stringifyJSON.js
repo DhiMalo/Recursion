@@ -4,7 +4,7 @@
 var stringifyJSON = function(obj) {
   // your code goes here
   // create an empty string and name it storage.
-  // console.log('obj we are passing into the stringifyJSON function is:', obj);
+  console.log('obj we are passing into the stringifyJSON function is:', obj);
   var storage = '';
   
   if ((typeof(obj) === 'number') || (obj === null) || (typeof(obj) === 'boolean')) {
@@ -16,16 +16,17 @@ var stringifyJSON = function(obj) {
 
   } else if (Array.isArray(obj)) {
     if (obj[0] === undefined) {
-      //console.log(obj, 'is an empty array');
+      console.log(obj, 'is an empty array');
       return '[' + ']';
 
     } else if ((typeof(obj[0]) === 'number') && (obj.length === 1)) {
-      //console.log(obj, 'is an array with a number in it');
+      console.log(obj, 'is an array with a number in it');
       return '[' + obj[0].toString() + ']';
 
     } else if ((typeof(obj[0]) === 'string') && (obj.length === 1)) {
-      //console.log(obj, 'is an array with a string in it');
+      console.log(obj, 'is an array with a string in it');
       return '[' + '\"' + obj[0].toString() + '\"' + ']';
+
     } else if ((typeof(obj[0]) === 'number') && (typeof(obj[1]) === 'string')) {
       //console.log(obj, 'is an array with a number and string in it');
       return '[' + stringifyJSON(obj[0]) + ',' + stringifyJSON(obj[1]) + ']';
@@ -40,7 +41,15 @@ var stringifyJSON = function(obj) {
       return '[' + resultsArray.join() + ']';
     }
   } else {
-    return
+      var resultsArray2 = [];
+      _.each(obj, function(val, key, obj) {
+        var valCopy2 = _.identity(val)
+        valCopy2 = stringifyJSON(val); 
+        var keyCopy = _.identity(key);
+        keyCopy = stringifyJSON(key);
+        resultsArray2.push(keyCopy+':'+valCopy2);
+      })
+      return '{' + resultsArray2.join() + '}';
   };
 };
 
