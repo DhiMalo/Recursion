@@ -9,15 +9,7 @@ var stringifyJSON = function(obj) {
   console.log('obj we are passing into the stringifyJSON function is:', obj );
   var storage = '';
   // first test checks to see whether the obj is a number.  (Base case)  
-  if ( typeof(obj) === 'number' ) {
-    var result = storage + obj;
-    return result;
-
-  } else if (obj === null) { //test for null
-    var result = storage + obj;
-    return result;
-
-  } else if ( typeof(obj) === 'boolean' ){ //address test for boolean
+  if ( ( typeof(obj) === 'number' ) || (obj === null ) || ( typeof(obj) === 'boolean' ) ) {
     var result = storage + obj;
     return result;
 
