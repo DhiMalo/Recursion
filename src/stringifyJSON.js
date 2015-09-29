@@ -16,24 +16,15 @@ var stringifyJSON = function(obj) {
     return coerceString + '\"' + obj + '\"';
 
   } else if (Array.isArray(obj)) {
-
-    if ((typeof(obj[0]) === 'number') && (obj.length === 1)) {
-      //console.log(obj, 'is an array with a number in it');
-      return '[' + obj[0].toString() + ']';
-
-    } else if ((typeof(obj[0]) === 'string') && (obj.length === 1)) {
-      //console.log(obj, 'is an array with a string in it');
-      return '[' + '\"' + obj[0].toString() + '\"' + ']';
       
-    } else {
-      var resultsArray = [];
-      _.each(obj, function(val, index, obj) {
-        var valCopy = _.identity(val)
-        valCopy = stringifyJSON(val); 
-        resultsArray.push(valCopy);
-      })
-      return '[' + resultsArray.join() + ']';
-    }
+    var resultsArray = [];
+    _.each(obj, function(val, index, obj) {
+      var valCopy = _.identity(val)
+      valCopy = stringifyJSON(val); 
+      resultsArray.push(valCopy);
+    });
+    return '[' + resultsArray.join() + ']';
+
   } else {
     var resultsArray2 = [];
     _.each(obj, function(val, key, obj) {
