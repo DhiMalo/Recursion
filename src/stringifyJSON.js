@@ -1,6 +1,7 @@
-// this is what you would do if you liked things to be easy:
-// var stringifyJSON = JSON.stringify;
-// but you don't so you're going to write it from scratch:
+// This function is a from-scratch implementation of the work of JSON.stringify 
+  // JSON.stringify breaks down complex values into strings so that they can be sent quickly via the web and re-assembled on the other side.  
+  // Normally the function is used to "stringify" a JSON object but can be used for many data types. 
+
 var stringifyJSON = function(obj) {
 
   var coerceString = '';
@@ -37,3 +38,5 @@ var stringifyJSON = function(obj) {
     return '{' + resultsArray2.join() + '}';
   };
 };
+
+
